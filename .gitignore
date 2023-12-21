@@ -1,0 +1,6 @@
+/.gradle/
+/.idea/
+/shared/build/
+/androidApp/build/
+
+#local.properties
