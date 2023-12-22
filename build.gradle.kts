@@ -17,10 +17,13 @@ buildscript {
     }
 }
 
-tasks.register("checkUpdates") {
-    dependsOn("dependencyUpdates")
+tasks {
+    register("checkUpdates") {
+        dependsOn("dependencyUpdates")
+    }
+
+    register("clean", Delete::class) {
+        delete(rootProject.buildDir)
+    }
 }
 
-tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
-}
