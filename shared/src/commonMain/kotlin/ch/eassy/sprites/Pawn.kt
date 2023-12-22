@@ -3,14 +3,15 @@ package ch.eassy.sprites
 import ch.eassy.utils.Color
 import ch.eassy.utils.Origin
 import ch.eassy.utils.Sprite
-import kotlin.math.abs
 import ch.eassy.utils.Origin.East as east
 import ch.eassy.utils.Origin.North as north
 import ch.eassy.utils.Origin.South as south
 import ch.eassy.utils.Origin.West as west
 
+import kotlin.math.abs
+
 class Pawn(sprite: Sprite, color: Color, origins: List<Origin>): Piece(sprite, color, origins) {
-    private var isFirstMove = true
+    private var isFirstMove = false
 
     init {
         isFirstMove = true
@@ -33,7 +34,7 @@ class Pawn(sprite: Sprite, color: Color, origins: List<Origin>): Piece(sprite, c
     private fun isLegalDefaultMove(tile: Tile): Boolean {
         val tilePiece = tile.getPiece()
         return tilePiece == null
-                && isMoveInLegalDirection(getTile()!!.getLocation(), tile.getLocation(), Pair(0, 1))
+                && isMoveInLegalDirection(getTile().getLocation(), tile.getLocation(), Pair(0, 1))
                 && isSafeMove(tile)
     }
 
@@ -41,7 +42,7 @@ class Pawn(sprite: Sprite, color: Color, origins: List<Origin>): Piece(sprite, c
         val tilePiece = tile.getPiece()
         return isFirstMove
                 && tilePiece == null
-                && isMoveInLegalDirection(getTile()!!.getLocation(), tile.getLocation(), Pair(0, 2))
+                && isMoveInLegalDirection(getTile().getLocation(), tile.getLocation(), Pair(0, 2))
                 && isSafeMove(tile)
     }
 
@@ -49,12 +50,13 @@ class Pawn(sprite: Sprite, color: Color, origins: List<Origin>): Piece(sprite, c
         val tilePiece = tile.getPiece()
         return tilePiece != null
                 && tilePiece.getColor() != getColor()
-                && isMoveInLegalDirection(getTile()!!.getLocation(), tile.getLocation(), Pair(1, 1))
+                && isMoveInLegalDirection(getTile().getLocation(), tile.getLocation(), Pair(1, 1))
                 && isSafeMove(tile)
     }
 
     private fun isMoveInLegalDirection(start: Pair<Int, Int>, target: Pair<Int, Int>, difference: Pair<Int, Int>): Boolean {
         // pawn only has one origin direction, other pieces may have two
+        // a regular board has x and y axis, so we express move difference as (x,y)
         when (getOrigins()[0]) {
             north -> {
                 // when moving down, we expect start y to be bigger than target y

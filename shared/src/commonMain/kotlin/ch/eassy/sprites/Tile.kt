@@ -71,7 +71,7 @@ class Tile(name: String, location: Pair<Int, Int>, color: Color) {
     private fun setAsMoveOrigin() {
         val tilePiece = tileState.value.piece
         if (tilePiece != null && isPlayerPiece(tilePiece)) {
-            tilePiece.toggleMarkForMove()
+            tilePiece.toggleSelection()
             tileState.value = TileState(isMoveOrigin = true)
         }
     }
@@ -80,7 +80,7 @@ class Tile(name: String, location: Pair<Int, Int>, color: Color) {
         val tilePiece = tileState.value.piece
         if (tilePiece != null && isPlayerPiece(tilePiece)) {
             resetOrigin()
-            tilePiece.toggleMarkForMove()
+            tilePiece.toggleSelection()
             tileState.value = TileState(piece = tilePiece)
         }
     }

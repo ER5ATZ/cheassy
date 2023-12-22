@@ -29,12 +29,12 @@ abstract class Traits(
 
     fun getOrigins(): List<Origin> = pieceState.value.origins
 
-    fun setColor(color: Color) {
-        pieceState.value = PieceState(color = color)
-    }
-
     fun setType(type: String) {
         pieceState.value = PieceState(type = type)
+    }
+
+    fun setColor(color: Color) {
+        pieceState.value = PieceState(color = color)
     }
 
     fun setSelected(isSelected: Boolean) {
@@ -45,6 +45,7 @@ abstract class Traits(
 
     open fun isLegalMove(tile: Tile) = false
 
+    // TODO call to game controller for check
     fun isSafeMove(tile: Tile) = true
 
     private data class PieceState(

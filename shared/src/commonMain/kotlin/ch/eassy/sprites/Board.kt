@@ -7,6 +7,6 @@ class Board(x: Int, y: Int, boardOff: Float) {
     }
 
     fun getTile(name: String): Tile? {
-        return tiles.find { t-> name.equals(t.getName()) }
+        return tiles.find { t-> name == t.getName() }
     }
 }
