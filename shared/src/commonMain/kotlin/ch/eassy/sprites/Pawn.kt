@@ -1,16 +1,21 @@
 package ch.eassy.sprites
 
-import ch.eassy.utils.Color
-import ch.eassy.utils.Origin
-import ch.eassy.utils.Sprite
-import ch.eassy.utils.Origin.East as east
-import ch.eassy.utils.Origin.North as north
-import ch.eassy.utils.Origin.South as south
-import ch.eassy.utils.Origin.West as west
-
 import kotlin.math.abs
+import ch.eassy.utils.Color
+import ch.eassy.utils.Origins
+import ch.eassy.utils.Pieces.Pawn
+import ch.eassy.utils.Sprite
+import ch.eassy.utils.Origins.East as east
+import ch.eassy.utils.Origins.North as north
+import ch.eassy.utils.Origins.South as south
+import ch.eassy.utils.Origins.West as west
 
-class Pawn(sprite: Sprite, color: Color, origins: List<Origin>): Piece(sprite, color, origins) {
+class Pawn(color: Color, origins: List<Origins>, tile: Tile): Piece(Sprite.get(Pawn), color, origins) {
+    init {
+        setTile(tile)
+        setType(Pawn.name)
+    }
+
     private var isFirstMove = false
 
     init {

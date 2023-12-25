@@ -1,12 +1,17 @@
 package ch.eassy.sprites
 
+import kotlin.math.abs
 import ch.eassy.utils.Color
-import ch.eassy.utils.Origin
+import ch.eassy.utils.Origins
+import ch.eassy.utils.Pieces.Bishop
 import ch.eassy.utils.Sprite
 
-import kotlin.math.abs
+class Bishop(color: Color, origins: List<Origins>, tile: Tile): Piece(Sprite.get(Bishop), color, origins) {
+    init {
+        setTile(tile)
+        setType(Bishop.name)
+    }
 
-class Bishop(sprite: Sprite, color: Color, origins: List<Origin>): Piece(sprite, color, origins) {
     override fun isLegalMove(tile: Tile): Boolean {
         val start = getTile().getLocation()
         val target = tile.getLocation()

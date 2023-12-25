@@ -1,10 +1,16 @@
 package ch.eassy.sprites
 
 import ch.eassy.utils.Color
-import ch.eassy.utils.Origin
+import ch.eassy.utils.Origins
+import ch.eassy.utils.Pieces.Rook
 import ch.eassy.utils.Sprite
 
-class Rook(sprite: Sprite, color: Color, origins: List<Origin>): Piece(sprite, color, origins) {
+class Rook(color: Color, origins: List<Origins>, tile: Tile): Piece(Sprite.get(Rook), color, origins) {
+    init {
+        setTile(tile)
+        setType(Rook.name)
+    }
+
     override fun isLegalMove(tile: Tile): Boolean {
         val start = getTile().getLocation()
         val target = tile.getLocation()

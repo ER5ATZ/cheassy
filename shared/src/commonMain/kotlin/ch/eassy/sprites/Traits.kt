@@ -2,14 +2,14 @@ package ch.eassy.sprites
 
 import ch.eassy.utils.Color
 import ch.eassy.utils.Colors
-import ch.eassy.utils.Origin
+import ch.eassy.utils.Origins
 import ch.eassy.utils.Sprite
 import kotlinx.coroutines.flow.MutableStateFlow
 
 abstract class Traits(
     sprite: Sprite,
     color: Color,
-    origins: List<Origin>
+    origins: List<Origins>
 ) {
     private val pieceState = MutableStateFlow(PieceState())
 
@@ -27,7 +27,7 @@ abstract class Traits(
 
     fun getColor(): Color = pieceState.value.color
 
-    fun getOrigins(): List<Origin> = pieceState.value.origins
+    fun getOrigins(): List<Origins> = pieceState.value.origins
 
     fun setType(type: String) {
         pieceState.value = PieceState(type = type)
@@ -51,7 +51,7 @@ abstract class Traits(
     private data class PieceState(
         val type: String = "none",
         val sprite: Sprite = Sprite(),
-        val origins: List<Origin> = emptyList(),
+        val origins: List<Origins> = emptyList(),
         val color : Color = Colors.black,
         val isSelected: Boolean = false,
     )

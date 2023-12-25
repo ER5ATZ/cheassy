@@ -1,13 +1,12 @@
 package ch.eassy.sprites
 
-import ch.eassy.utils.Color
-import ch.eassy.utils.Origin
-import ch.eassy.utils.Sprite
-
 import kotlin.math.abs
+import ch.eassy.utils.Color
+import ch.eassy.utils.Origins
+import ch.eassy.utils.Sprite
 import kotlinx.datetime.Clock
 
-abstract class Piece(sprite: Sprite, color: Color, origins: List<Origin>): Traits(sprite, color, origins) {
+abstract class Piece(sprite: Sprite, color: Color, origins: List<Origins>): Traits(sprite, color, origins) {
     val id = Clock.System.now().toEpochMilliseconds()
 
     // a piece always has a tile
@@ -25,6 +24,10 @@ abstract class Piece(sprite: Sprite, color: Color, origins: List<Origin>): Trait
     }
 
     fun getTile() = tile
+
+    fun setTile(tile: Tile) {
+        this.tile = tile
+    }
 
     open fun moveTo(targetTile: Tile) {
         tile.setPiece(null)
