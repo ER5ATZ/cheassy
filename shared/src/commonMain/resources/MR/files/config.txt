@@ -1,0 +1,7 @@
+## default chess
+game.boards = 8,8
+game.pieces = RwA1,NwB1,BwC1,KwD1,QwE1,BwF1,NwG1,RwH1,PwA2,PwB2,PwC2,PwD2,PwE2,PwF2,PwG2,PwH2,RbA8,NbB8,BbC8,KbD8,QbE8,BbF8,NbG8,RbH8,PbA7,PbB7,PbC7,PbD7,PbE7,PbF7,PbG7,PbH7
+
+## alice chess
+game.alice.boards = 8,8;8,8
+game.alice.pieces = RwA1,NwB1,BwC1,KwD1,QwE1,BwF1,NwG1,RwH1,PwA2,PwB2,PwC2,PwD2,PwE2,PwF2,PwG2,PwH2, ,RbA8,NbB8,BbC8,KbD8,QbE8,BbF8,NbG8,RbH8,PbA7,PbB7,PbC7,PbD7,PbE7,PbF7,PbG7,PbH7
