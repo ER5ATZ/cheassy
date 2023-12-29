@@ -33,4 +33,8 @@ actual class FileManager actual constructor() {
 
         return NSString.stringWithContentsOfURL(filePath!!, NSUTF8StringEncoding, null)
     }
+
+    actual fun readRawFile(fileName: String): String {
+        return "ios"
+    }
 }

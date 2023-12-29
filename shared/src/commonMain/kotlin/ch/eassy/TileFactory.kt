@@ -27,7 +27,7 @@ class TileFactory {
         for (row in 0 until y) {
             for (col in 0 until x) {
                 val isBlack = (row + col) % 2 == 1
-                val tileColor = if (isBlack) Colors.black else Colors.white
+                val tileColor = if (isBlack) Colors.Black else Colors.White
                 val tile = Tile(
                     name = "${('A' + col).toChar()}${row + 1}",
                     //position = Pair(boardOff + col, /*yOffset +*/ row),

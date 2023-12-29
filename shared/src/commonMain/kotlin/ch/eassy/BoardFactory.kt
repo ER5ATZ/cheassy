@@ -19,16 +19,16 @@ class BoardFactory() {
     fun getBoards(numberOfPlayers: Int, sizes : List<Pair<Int, Int>>): Map<String, Board> {
         val playerColors: MutableMap<Players, Color> = mutableMapOf()
         val boards: MutableMap<String, Board> = mutableMapOf()
-        var color = Colors.white
+        var color = Colors.White
         val players = playerFactory.getPlayers(numberOfPlayers)
 
         // TODO this whole part might become obsolete once we have new sprites
         players.forEach { player ->
             playerColors[player] = color
             color = Color.create(255,
-                maxOf(0, color.red - 1 / 255),
-                maxOf(0, color.green - 1 / 255),
-                maxOf(0, color.blue - 1 / 255))
+                maxOf(0, color.Red - 1 / 255),
+                maxOf(0, color.Green - 1 / 255),
+                maxOf(0, color.Blue - 1 / 255))
         }
 
         boards.putAll(tileFactory.generateTiles(sizes))

@@ -6,103 +6,88 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import ch.eassy.utils.Screens.About
+import ch.eassy.utils.Screens.ChooseGame
+import ch.eassy.utils.Screens.ColorPicker
+import ch.eassy.utils.Screens.Menu
+import ch.eassy.utils.Screens.PlayGame
+import ch.eassy.utils.Screens.SavedGame
+import ch.eassy.utils.Screens.Settings
 
 class MainActivity : ComponentActivity() {
-    private var currentScreen by mutableStateOf(Screen.Menu)
+    private var currentScreen by mutableStateOf(Menu)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MenuTheme {
+            MenuTheme(bgColor = Menu.color) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = MaterialTheme.colors.background,
                 ) {
                     //GreetingView(Greeting().greet())
                     when (currentScreen) {
-                        Screen.Menu -> MenuScreen(onStartGameClick = { currentScreen = Screen.ChessGame })
-                        Screen.ChessGame -> ChessGameScreen()
+                        Menu -> MenuScreen(
+                            onStartGameClick = { currentScreen = ChooseGame },
+                            onSavedGameClick = { currentScreen = SavedGame },
+                            onSettingsClick = { currentScreen = Settings },
+                            onAboutClick = { currentScreen = About },
+                        )
+                        ChooseGame -> ChessGameScreen(
+                            onBackClick = { currentScreen = Menu },
+                            onDefaultClick = { currentScreen = ColorPicker },
+                            onAliceClick = { currentScreen = ColorPicker },
+                            onChineseClick = { currentScreen = ColorPicker },
+                            onStarTrekClick = { currentScreen = ColorPicker },
+                        )
+                        SavedGame -> SavedGameScreen(
+                            onBackClick = { currentScreen = Menu },
+                            onContinueClick = { currentScreen = PlayGame },
+                        )
+                        Settings -> SettingsScreen(
+                            onBackClick = { currentScreen = Menu },
+                        )
+                        About -> CreditsScreen(
+                            onBackClick = { currentScreen = Menu },
+                        )
+                        ColorPicker -> ColorPickerScreen(
+                            onBackClick = { currentScreen = ChooseGame },
+                            onColorPick = { currentScreen = PlayGame },
+                        )
+                        PlayGame -> PlayGameScreen(
+                            onBackClick = { currentScreen = Menu },
+                        )
                     }
 
                     AnimatedVisibility(
-                        visible = currentScreen == Screen.Menu,
+                        visible = currentScreen == Menu,
                         enter = slideInHorizontally(initialOffsetX = { it }),
                         exit = slideOutHorizontally(targetOffsetX = { -it })
                     ) {
-                        MenuScreen(onStartGameClick = { currentScreen = Screen.ChessGame })
+                        MenuScreen(
+                            onStartGameClick = { currentScreen = ChooseGame },
+                            onSavedGameClick = { currentScreen = SavedGame },
+                            onSettingsClick = { currentScreen = Settings },
+                            onAboutClick = { currentScreen = About })
                     }
 
                     AnimatedVisibility(
-                        visible = currentScreen == Screen.ChessGame,
+                        visible = currentScreen == ChooseGame,
                         enter = slideInHorizontally(initialOffsetX = { 2*it }),
                         exit = slideOutHorizontally(targetOffsetX = { it })
                     ) {
-                        ChessGameScreen()
+                        ChessGameScreen({ currentScreen = Menu }, { currentScreen = ColorPicker }, {
+                            currentScreen = ColorPicker
+                        }, { currentScreen = ColorPicker }) { currentScreen = ColorPicker }
                     }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun MenuScreen(onStartGameClick: () -> Unit) {
-    MenuTheme {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(text = "Chess App")
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Button(onClick = { /* Navigate to ColorPickerScreen */ }) {
-                Text("Pick Player Color")
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Button(onClick = { onStartGameClick() }) {
-                Text("Start New Game")
-            }
-        }
-    }
-}
-
-@Composable
-fun ChessGameScreen() {
-    // TODO: Implement the UI for the chess game screen
-}
-
-enum class Screen {
-    Menu,
-    ChessGame
-}
-
-@Composable
-fun GreetingView(text: String) {
-    Text(text = text)
-}
-@Preview
-@Composable
-fun DefaultPreview() {
-    MenuTheme {
-        GreetingView("Hello, Android!")
     }
 }

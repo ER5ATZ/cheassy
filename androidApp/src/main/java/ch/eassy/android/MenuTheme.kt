@@ -14,9 +14,11 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ch.eassy.utils.Colors
 
 @Composable
 fun MenuTheme(
+    bgColor: Colors,
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
@@ -25,14 +27,14 @@ fun MenuTheme(
             primary = Color(0xFFBB86FC),
             primaryVariant = Color(0xFF3700B3),
             secondary = Color(0xFF03DAC5),
-            background = Color.DarkGray
+            background = getBackground(Color.DarkGray, bgColor)
         )
     } else {
         lightColors(
             primary = Color(0xFF6200EE),
             primaryVariant = Color(0xFF3700B3),
             secondary = Color(0xFF03DAC5),
-            background = Color.LightGray
+            background = getBackground(Color.LightGray, bgColor)
         )
     }
     val typography = Typography(
@@ -53,5 +55,21 @@ fun MenuTheme(
         typography = typography,
         shapes = shapes,
         content = content
+    )
+}
+
+fun getBackground(brightness: Color, shade: Colors): Color {
+    val clampedRatio = 0.5f
+    val grayFactor = 1 - clampedRatio
+
+    val blendedRed = (brightness.red * grayFactor) + (shade.color.red * clampedRatio)
+    val blendedGreen = (brightness.green * grayFactor) + (shade.color.green * clampedRatio)
+    val blendedBlue = (brightness.blue * grayFactor) + (shade.color.blue * clampedRatio)
+
+    return Color(
+        red = blendedRed.coerceIn(0f, 1f),
+        green = blendedGreen.coerceIn(0f, 1f),
+        blue = blendedBlue.coerceIn(0f, 1f),
+        alpha = 1f
     )
 }

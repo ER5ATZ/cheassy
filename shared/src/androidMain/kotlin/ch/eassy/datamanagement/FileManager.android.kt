@@ -1,27 +1,36 @@
 package ch.eassy.datamanagement
 
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
-import android.content.Context
+import android.annotation.SuppressLint
 
 actual class FileManager actual constructor() {
-
-    private val context: Context = TODO()
+    private val application = AndroidApplicationWrapper.instance()
 
     actual fun saveFile(fileName: String, content: String) {
-        FileOutputStream(File(context.filesDir, fileName)).use {
+        /*FileOutputStream(File(context.filesDir, fileName)).use {
             it.write(content.toByteArray())
-        }
+        }*/
     }
 
     actual fun readFile(fileName: String): String? {
-        return try {
+        return ""
+        /*return try {
             FileInputStream(File(context.filesDir, fileName)).use {
                 it.reader().readText()
             }
         } catch (e: Exception) {
             null
+        }*/
+    }
+
+    @SuppressLint("DiscouragedApi")
+    @Deprecated("Only use during App development")
+    actual fun readRawFile(fileName: String): String {
+        with(application) {
+            val resourceId = resources.getIdentifier(
+                fileName.substringBefore("."), "raw", packageName
+            )
+            return resources.openRawResource(resourceId)
+                .bufferedReader().readText()
         }
     }
 }

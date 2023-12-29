@@ -87,7 +87,7 @@ class Tile(name: String, location: Pair<Int, Int>, color: Color) {
 
     private fun isPlayerPiece(piece: Piece): Boolean {
         // TODO maybe ask the game controller instead though
-        return Colors.white.equals(piece.getColor())
+        return Colors.White.equals(piece.getColor())
     }
 
     private fun setAsTarget() {
@@ -140,10 +140,10 @@ class Tile(name: String, location: Pair<Int, Int>, color: Color) {
         val isMoveOrigin: Boolean = false,
         val isMoveTarget: Boolean = false,
         val isValidTarget: Boolean = false,
-        val color: Color = Colors.brown,
+        val color: Color = Colors.Brown,
         val isDark: Boolean = false,
-        val originalColor: Color = Colors.black,
-        val highlightColor: Color = Colors.turqouise,
+        val originalColor: Color = Colors.Black,
+        val highlightColor: Color = Colors.Turquoise,
         val isClickable: Boolean = false,
     )
 }
