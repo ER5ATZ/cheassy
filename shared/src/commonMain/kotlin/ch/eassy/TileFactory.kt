@@ -1,9 +1,8 @@
 package ch.eassy
 
 import ch.eassy.sprites.Board
-import ch.eassy.utils.Colors
 import ch.eassy.sprites.Tile
-import kotlin.collections.HashMap
+import ch.eassy.utils.Colors
 
 class TileFactory {
 
@@ -31,7 +30,7 @@ class TileFactory {
                 val tile = Tile(
                     name = "${('A' + col).toChar()}${row + 1}",
                     //position = Pair(boardOff + col, /*yOffset +*/ row),
-                    color = tileColor,
+                    color = tileColor.color,
                     location = Pair(col + 1, row + 1)
                 )
 

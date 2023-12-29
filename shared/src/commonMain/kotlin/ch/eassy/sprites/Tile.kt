@@ -140,10 +140,10 @@ class Tile(name: String, location: Pair<Int, Int>, color: Color) {
         val isMoveOrigin: Boolean = false,
         val isMoveTarget: Boolean = false,
         val isValidTarget: Boolean = false,
-        val color: Color = Colors.Brown,
+        val color: Color = Colors.Brown.color,
         val isDark: Boolean = false,
-        val originalColor: Color = Colors.Black,
-        val highlightColor: Color = Colors.Turquoise,
+        val originalColor: Color = Colors.Black.color,
+        val highlightColor: Color = Colors.Turquoise.color,
         val isClickable: Boolean = false,
     )
 }

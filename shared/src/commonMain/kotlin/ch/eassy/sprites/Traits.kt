@@ -52,7 +52,7 @@ abstract class Traits(
         val type: String = "none",
         val sprite: Sprite = Sprite(),
         val origins: List<Origins> = emptyList(),
-        val color : Color = Colors.Black,
+        val color : Color = Colors.Black.color,
         val isSelected: Boolean = false,
     )
 }

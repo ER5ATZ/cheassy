@@ -1,6 +1,6 @@
 package ch.eassy.utils
 
-enum class Players(color: Color) {
+enum class Players(color: Colors) {
     White(Colors.White),
     Black(Colors.Black),
     Beige(Colors.Beige),

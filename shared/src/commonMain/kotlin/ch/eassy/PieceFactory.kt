@@ -16,7 +16,7 @@ import ch.eassy.utils.Pieces
 import ch.eassy.utils.Players
 
 class PieceFactory {
-    private var lightColor: Color = Colors.White
+    private var lightColor: Color = Colors.White.color
     private var darkColors: List<Color> = listOf()
     fun createAndSetPieces(
         boards: MutableMap<String, Board>,
